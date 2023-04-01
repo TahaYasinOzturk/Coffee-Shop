@@ -13,7 +13,7 @@ function HomePage() {
 	}, []);
 
 	return (
-		<div className="container-fluid bg-success ">
+		<div className="container-fluid bg-menu-list ">
 			<div className="row row-cols-auto">
 				{loading ? (
 					<div
@@ -24,7 +24,7 @@ function HomePage() {
 						<span className="visually-hidden">Loading...</span>
 					</div>
 				) : (
-					coffees.map((deger) => <MenuList items={deger} />)
+					coffees.map((deger) => <MenuList key={deger._id} items={deger} />)
 				)}
 			</div>
 		</div>
