@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllCoffee } from "../actions/CoffeeActions";
+import { addToCartAction } from "../actions/CartActions";
 
 function MenuList({ items }) {
 	const dispatch = useDispatch();
@@ -10,16 +10,20 @@ function MenuList({ items }) {
 	const [miktar, setMiktar] = useState(1);
 	const [ozellikKey, setOzellikKey] = useState(0);
 
-	const adetHandler = (e) => {
-		setMiktar(e.target.value);
-	};
 	const changeFunc = (e) => {
 		setOzellik(e.target.value);
 		setOzellikKey(items.sizes.indexOf(e.target.value));
 	};
-	// const addToCardFunc = () => {
-	//   dispatch(addToCartAction(items,miktar,ozellik))
-	// };
+	const adetHandler = (e) => {
+		if (e.target.value < 1) {
+			setMiktar(1);
+		} else {
+			setMiktar(e.target.value);
+		}
+	};
+	const addToCardFunc = () => {
+		dispatch(addToCartAction(items, miktar, ozellik, ozellikKey));
+	};
 
 	return (
 		<div className="mx-auto p-2">
@@ -42,7 +46,7 @@ function MenuList({ items }) {
 								name=""
 								id=""
 								className="form-select mb-3"
-								onChange={(e) => changeFunc(e)}
+								onChange={changeFunc}
 							>
 								{items.sizes.map((size, index) => (
 									<option key={index} value={size}>
@@ -61,7 +65,11 @@ function MenuList({ items }) {
 						</div>
 					</div>
 					<p className="card-text">{items.price[ozellikKey] * miktar} ₺</p>
-					<button type="button" className="btn btn-success">
+					<button
+						type="button"
+						className="btn btn-success"
+						onClick={addToCardFunc}
+					>
 						SEPETE EKLE
 					</button>
 				</div>
