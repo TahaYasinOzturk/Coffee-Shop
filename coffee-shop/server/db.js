@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect(
-	"mongodb+srv://admin:1234@redux-trial-cluster.rrczll6.mongodb.net/coffee-db?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
 var db = mongoose.connection;
 

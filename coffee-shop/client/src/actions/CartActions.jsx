@@ -4,9 +4,9 @@ export const addToCartAction =
 			title: items.title,
 			type: items.type,
 			subType: items.subType,
-			sizes: ozellik,
+			size: ozellik,
 			price: items.price[ozellikKey],
-			miktar: miktar,
+			quantity: miktar,
 			description: items.description,
 			picture: items.picture,
 		};
