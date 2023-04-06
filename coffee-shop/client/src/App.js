@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import CartPage from "./pages/CartPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
 	return (
@@ -11,7 +12,8 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
-				<Route path="/sepet" element={<CartPage />} />
+				<Route path="/cart" element={<CartPage />} />
+				<Route path="/register" element={<RegisterPage />} />
 			</Routes>
 			<Footer />
 		</div>

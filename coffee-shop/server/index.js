@@ -4,20 +4,18 @@
 const express = require("express");
 const cors = require("cors");
 
+const db = require("./db");
 /* require("./db.js"); */
-const coffeesRoute = require("./routes/coffeesRoute");
 //servisleri route ile çağırma
-//coffee servisleri
+const coffeesRoute = require("./routes/coffeesRoute");
 
 /* app.use("/".coffeesRoute); */
 
 const app = express();
 
-const db = require("./db");
-
 app.use(express.json());
 app.use(cors());
-
+//coffee servisleri
 app.use("/api/coffees", coffeesRoute);
 const port = 4000;
 app.listen(port, () => {
