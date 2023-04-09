@@ -8,6 +8,7 @@ const db = require("./db");
 /* require("./db.js"); */
 //servisleri route ile çağırma
 const coffeesRoute = require("./routes/coffeesRoute");
+const usersRoute = require("./routes/usersRoute");
 
 /* app.use("/".coffeesRoute); */
 
@@ -17,6 +18,8 @@ app.use(express.json());
 app.use(cors());
 //coffee servisleri
 app.use("/api/coffees", coffeesRoute);
+
+app.use("/api/users", usersRoute);
 const port = 4000;
 app.listen(port, () => {
 	console.log(`Serverimiz ${port} portunda çalışmaktadır. `);
