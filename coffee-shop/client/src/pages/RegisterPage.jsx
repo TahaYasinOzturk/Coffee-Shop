@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { registerUserAction } from "../actions/UserActions";
+import { Link } from "react-router-dom";
 
 function RegisterPage() {
 	const [name, setName] = useState("");
@@ -10,8 +11,6 @@ function RegisterPage() {
 	const [password2, setPassword2] = useState("");
 
 	const dispatch = useDispatch();
-	const userState = useSelector((state) => state.registerUserReducer);
-	const { success, error, loading } = userState;
 
 	const kayitHandler = () => {
 		if (mail == "" || name == "" || password == "" || password2 == "") {
@@ -25,21 +24,6 @@ function RegisterPage() {
 				password: password,
 			};
 			dispatch(registerUserAction(newUser));
-			if (success) {
-				Swal.fire({
-					position: "center",
-					icon: "success",
-					title: "Kullanıcı Kaydı Başarılı",
-					showConfirmButton: false,
-					timer: 1500,
-				});
-			} else if (error) {
-				Swal.fire({
-					icon: "error",
-					title: "Oops...",
-					text: "Böyle bir kullanıcı var!",
-				});
-			}
 		}
 	};
 	return (
@@ -75,6 +59,9 @@ function RegisterPage() {
 					<button className=" btn btn-success mb-4 mt-3" onClick={kayitHandler}>
 						KAYIT OL
 					</button>
+					<Link to="/login" className="w-50 mb-4 btn btn-success mx-auto">
+						Giriş Yapmak için Tıkla
+					</Link>
 				</div>
 			</div>
 		</div>
