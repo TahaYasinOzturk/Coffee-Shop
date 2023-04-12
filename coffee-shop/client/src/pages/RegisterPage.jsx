@@ -31,29 +31,29 @@ function RegisterPage() {
 			<div className="container ">
 				<div className="w-50 row mx-auto">
 					<input
-						className=" my-3 "
+						className=" my-3 text-success"
 						type="text"
 						placeholder="Kullanıcı adınızı giriniz..."
 						onChange={(e) => setName(e.target.value)}
 					/>
 
 					<input
-						className=" my-3 "
+						className=" my-3 text-success"
 						type="text"
 						placeholder="Email adresinizi giriniz..."
 						onChange={(e) => setMail(e.target.value)}
 					/>
 
 					<input
-						className=" my-3 "
+						className=" my-3 text-success"
 						type="password"
 						placeholder="Parolanızı giriniz..."
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<input
-						className=" my-3 "
+						className=" my-3 text-success"
 						type="password"
-						placeholder="Parolanızı yeniden girin."
+						placeholder="Parolanızı yeniden giriniz..."
 						onChange={(e) => setPassword2(e.target.value)}
 					/>
 					<button className=" btn btn-success mb-4 mt-3" onClick={kayitHandler}>

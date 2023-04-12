@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartAction } from "../actions/CartActions";
+import CheckoutPage from "./CheckoutPage";
 
 function CartPage() {
 	const cartState = useSelector((state) => state.addToCartReducer);
@@ -20,6 +21,7 @@ function CartPage() {
 					<div className="row">
 						<p className="text-success">Toplam : {totalPrice} ₺ </p>
 					</div>
+					<CheckoutPage toplamfiyat={totalPrice} />
 					{cartItems.map((coffees) => (
 						<div
 							className="row shadow border border-success m-2 p-0 rounded-5"
