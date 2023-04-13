@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const OrderModel = require("../models/OrderModel");
 const app = express();
+app.use(cors());
 
 router.post("/checkout", async (req, res) => {
 	const { token, toplamfiyat, cartItems, currentUser } = req.body;
@@ -28,10 +29,10 @@ router.post("/checkout", async (req, res) => {
 			}
 		);
 		if (payment) {
-			const newModel = new OrderModel({
+			const newOrder = new OrderModel({
 				name: currentUser.name,
 				email: currentUser.mail,
-				userid: currentUser.name,
+				userid: currentUser._id,
 				orderItems: cartItems,
 				shippingAddress: {
 					street: token.card.address_line1,
@@ -39,17 +40,27 @@ router.post("/checkout", async (req, res) => {
 					country: token.card.address_country,
 					zipCode: token.card.address_zip,
 				},
-				orderAmount: toplamfiyat,
-				isDelivered: false,
+
 				transactionId: payment.source.id,
 			});
-			newModel.save();
+			newOrder.save();
 			res.send("Ödeme Başarıyla Gerçekleşti");
 		} else {
 			res.send("Upps bir şeyler ters gitti..");
 		}
 	} catch (error) {
 		res.status(400).json({ message: "Ödeme Başarısız", error });
+	}
+});
+
+router.post("/getusersorders", async (req, res) => {
+	const { userid } = req.body;
+
+	try {
+		const orders = await OrderModel.find({ userid: userid }).sort({ _id: -1 });
+		res.send(orders);
+	} catch (error) {
+		res.status(400).json({ message: "Siparişlere Erişilemiyor" });
 	}
 });
 
