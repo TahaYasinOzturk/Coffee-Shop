@@ -29,7 +29,7 @@ router.post("/checkout", async (req, res) => {
 			}
 		);
 		if (payment) {
-			const newOrder = new OrderModel({
+			const newModel = new OrderModel({
 				name: currentUser.name,
 				email: currentUser.mail,
 				userid: currentUser._id,
@@ -40,10 +40,11 @@ router.post("/checkout", async (req, res) => {
 					country: token.card.address_country,
 					zipCode: token.card.address_zip,
 				},
-
+				orderAmount: toplamfiyat,
+				isDelivered: false,
 				transactionId: payment.source.id,
 			});
-			newOrder.save();
+			newModel.save();
 			res.send("Ödeme Başarıyla Gerçekleşti");
 		} else {
 			res.send("Upps bir şeyler ters gitti..");
@@ -53,14 +54,14 @@ router.post("/checkout", async (req, res) => {
 	}
 });
 
-router.post("/getusersorders", async (req, res) => {
+router.post("/getUserOrders", async (req, res) => {
 	const { userid } = req.body;
 
 	try {
 		const orders = await OrderModel.find({ userid: userid }).sort({ _id: -1 });
 		res.send(orders);
 	} catch (error) {
-		res.status(400).json({ message: "Siparişlere Erişilemiyor" });
+		res.send(error);
 	}
 });
 
