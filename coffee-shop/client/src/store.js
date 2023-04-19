@@ -2,6 +2,8 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {
+	addCoffeeReducer,
+	editCoffeeReducer,
 	getAllCoffeeReducer,
 	getCoffeeByIdReducer,
 } from "./reducers/CoffeeReducers";
@@ -31,6 +33,8 @@ const finalReducers = combineReducers({
 	getAllOrdersReducer: getAllOrdersReducer,
 	deliverOrderReducer: deliverOrderReducer,
 	getCoffeeByIdReducer: getCoffeeByIdReducer,
+	editCoffeeReducer: editCoffeeReducer,
+	addCoffeeReducer: addCoffeeReducer,
 });
 
 const cartItems = localStorage.getItem("cartItems")

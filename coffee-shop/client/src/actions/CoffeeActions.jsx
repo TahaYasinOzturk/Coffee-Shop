@@ -51,3 +51,33 @@ export const getCoffeeByIdAction = () => async (dispatch) => {
 		dispatch({ type: "GET_A_COFFEE_FAILED", payload: error });
 	}
 };
+
+//Edit Coffee
+export const editCoffeeAction = (editedCoffee) => async (dispatch) => {
+	dispatch({ type: "EDIT_COFFEE_REQUEST" });
+
+	try {
+		const response = await axios.post(
+			"http://localhost:4000/api/coffees/editCoffee",
+			{ editedCoffee }
+		);
+		dispatch({ type: "EDIT_COFFEE_SUCCESS", payload: response.data });
+	} catch (error) {
+		dispatch({ type: "EDIT_COFFEE_FAILED", payload: error });
+	}
+};
+
+export const addCoffeeAction = (coffee) => async (dispatch) => {
+	dispatch({ type: "ADD_COFFEE_REQUEST" });
+
+	try {
+		const response = await axios.post(
+			"http://localhost:4000/api/coffees/addCoffee",
+			{ coffee }
+		);
+		dispatch({ type: "ADD_COFFEE_SUCCESS", payload: response.data });
+		// window.location.href("/admin/menulist");
+	} catch (error) {
+		dispatch({ type: "ADD_COFFEE_FAILED", payload: error });
+	}
+};
